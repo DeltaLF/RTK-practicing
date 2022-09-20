@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { QueryParamProvider } from 'use-query-params';
 import './index.css';
 import FullscreenProgress from './shared/components/FullscreenProgress/FullscreenProgress';
+import Auth from './features/auth/Auth';
 import { persistor, store } from './shared/redux/store';
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <BrowserRouter>
           <QueryParamProvider ReactRouterRoute={Route}>
             <CssBaseline />
+            <Auth />
           </QueryParamProvider>
         </BrowserRouter>
       </PersistGate>
