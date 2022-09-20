@@ -10,7 +10,8 @@ import { persistor, store } from './shared/redux/store';
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate loading={<FullscreenProgress />} persistor={persistor}>
+      <PersistGate loading={<FullscreenProgress />} persistor={persistor}> 
+      {/* for persisting redux data */}
         <BrowserRouter>
           <QueryParamProvider ReactRouterRoute={Route}>
             <CssBaseline />

@@ -8,8 +8,8 @@ import { unauthenticatedMiddleware } from './middleware/unauthenticatedMiddlewar
 const reducers = {};
 
 const combinedReducer = combineReducers<typeof reducers>(reducers);
-
 export const rootReducer: Reducer<RootState> = (state, action) => {
+  // a rootReducer with some global redcuers
   if (action.type === RESET_STATE_ACTION_TYPE) {
     state = {} as RootState;
   }
@@ -17,15 +17,18 @@ export const rootReducer: Reducer<RootState> = (state, action) => {
   return combinedReducer(state, action);
 }
 
+
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+  middleware: (getDefaultMiddleware) => { 
+    return getDefaultMiddleware({
+    // use default middleware and add some custom middleware 
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
     }
   }).concat([
     unauthenticatedMiddleware
-  ]),
+  ])},
 });
 
 export const persistor = persistStore(store);
