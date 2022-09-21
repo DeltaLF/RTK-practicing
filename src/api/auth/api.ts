@@ -9,7 +9,9 @@ export const authApi = createApi({
   }),
   endpoints: (builder) => ({
     getAccessToken: builder.query<AuthResponse, string>({
+      // final url: baseUrl/url
       query: (code) => {
+       // params come from useQuery
         return ({
           url: 'github/access_token',
           method: 'POST',

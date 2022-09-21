@@ -6,8 +6,10 @@ const Login = () => {
   return (
     <Container maxWidth={false}>
       <Box height="100vh" textAlign="center" clone>
-        <Grid container spacing={3} justify="center" alignItems="center">
+        <Grid container spacing={3} justify="center" alignItems="center" >
+          {/* large container */}
           <Grid item xs="auto">
+            {/* small container for header and icon */}
             <Typography variant="h5" component="h1" gutterBottom>
               Log in via Github
             </Typography>

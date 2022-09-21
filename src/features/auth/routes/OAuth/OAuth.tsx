@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Redirect } from 'react-router';
 import { StringParam, useQueryParam } from 'use-query-params';
 import { authApi } from '../../../../api/auth/api';
@@ -8,16 +8,21 @@ import { authSlice } from '../../slice';
 
 const OAuth = () => {
   const dispatch =  useTypedDispatch();
-  const [code] = useQueryParam('code', StringParam);
-  const accessTokenQueryResult = authApi.endpoints.getAccessToken.useQuery(code!, {
+  const [code] = useQueryParam('code', StringParam); 
+  // parse the url params
+  // http://xxx?code=abc
+  // code: abc
+  const accessTokenQueryResult = authApi.endpoints.getAccessToken.useQuery(code!, { 
+    // code!: a non-null assertion
+    // skip if code is undefined, null
     skip: !code
   });
-  const { data } = accessTokenQueryResult;
+  const { data } = accessTokenQueryResult; // response
   const accessToken = data?.access_token;
 
   useEffect(() => {
     if (!accessToken) return;
-
+// update slice if accessToekn is fetched
     dispatch(authSlice.actions.updateAccessToken(accessToken));
   }, [dispatch, accessToken]);
 
