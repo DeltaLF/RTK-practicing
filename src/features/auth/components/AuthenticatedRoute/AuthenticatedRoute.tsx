@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import  { FC } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
 import { useAuthUser } from '../../hooks/useAuthUser';
 
@@ -12,12 +12,14 @@ const AuthenticatedRoute: FC<AuthenticatedRouteProps> = ({
   ...routeProps
 }) => {
   const user = useAuthUser();
+  // undefined if uninitialized
 
   return (
     <Route
       {...routeProps}
       render={({ location }) => {
         if (onlyPublic) {
+          // route for rendering public page
           return !user ? (
             children
           ) : (
@@ -31,6 +33,7 @@ const AuthenticatedRoute: FC<AuthenticatedRouteProps> = ({
         }
 
         return user ? (
+          // auth route
           children
         ) : (
           <Redirect
