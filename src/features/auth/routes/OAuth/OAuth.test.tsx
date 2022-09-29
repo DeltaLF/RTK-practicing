@@ -1,6 +1,5 @@
 import { act, render, screen, waitFor } from '@testing-library/react';
 import { createMemoryHistory, History } from 'history';
-import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { Route } from 'react-router-dom';
@@ -31,10 +30,13 @@ const arrange = (path: History.Path) => {
 
 describe('Route/OAuth', () => {
   it('should not call API and redirect to login', async () => {
+          // because code is not definfed
     await act(async () => {
       const { apiSpy, history } = arrange('/oauth');
 
+
       await waitFor(() => {
+        // redirect to login because not authenticated
         expect(history.location.pathname).toBe('/login');
         expect(apiSpy).not.toHaveBeenCalled();
       });

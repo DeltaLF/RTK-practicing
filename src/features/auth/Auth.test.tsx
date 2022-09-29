@@ -28,6 +28,7 @@ describe('Feature/Auth', () => {
   it('should render nothing', async () => {
     act(() => {
       const { renderResult: { container } } = arrange('/');
+      // no route corresponds to '/'
       expect(container.innerHTML).toBe('');
     });
   });

@@ -6,6 +6,7 @@ const getUser: MockAPIHandler = (req, res, ctx ) => {
   const token = req.headers.get('Authorization');
 
   if (token?.includes(VALID_ACCESS_TOKEN)) {
+    // mock request ID
     return res(ctx.json(userMockApiData.user))
   }
 
